@@ -1,0 +1,20 @@
+{
+    "name": "cdric/site-php",
+    "authors": [
+        {
+            "name": "Cdric-art",
+            "email": "cdric.art@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Router\\": "Routes/",
+            "App\\": "App/",
+            "Database\\": "database/"
+        }
+    },
+    "require": {
+        "larapack/dd": "^1.1",
+      "ext-pdo": "*"
+    }
+}
