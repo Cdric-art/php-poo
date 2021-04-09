@@ -1,7 +1,7 @@
 <?php
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use App\Exceptions\NotFoundException;
 use Router\Router;
@@ -22,6 +22,9 @@ $router->getUrl('/', 'App\Controllers\BlogController@welcome');
 $router->getUrl('/posts', 'App\Controllers\BlogController@index');
 $router->getUrl('/posts/:id', 'App\Controllers\BlogController@show');
 $router->getUrl('/tags/:id', 'App\Controllers\BlogController@tag');
+
+$router->getUrl('/admin/posts', 'App\Controllers\Admin\PostController@index');
+$router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 
 try {
     $router->run();
