@@ -36,4 +36,27 @@ class Post extends Model
             WHERE pt.post_id = ?
             ", [$this->id]);
     }
+
+    public function update(int $id, array $data, ?array $relation = null): bool
+    {
+        parent::update($id, $data);
+
+        $stmt = $this->db->getPDO()->prepare("DELETE FROM post_tag WHERE post_id = :id");
+        $result = $stmt->execute([
+            ':id' => $id
+        ]);
+
+        foreach ($relation as $tagId) {
+            $stmt = $this->db->getPDO()->prepare("INSERT post_tag (post_id, tag_id) VALUES (:post_id, :tag_id)");
+            $stmt->execute([
+               ':post_id' => $id,
+               ':tag_id' => $tagId
+            ]);
+        }
+
+        if ($result) {
+            return true;
+        }
+
+    }
 }

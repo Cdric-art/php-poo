@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Tags;
 
 class PostController extends Controller
 {
@@ -18,14 +19,16 @@ class PostController extends Controller
     public function edit(int $id)
     {
         $post = (new Post($this->getDb()))->findById($id);
-        return $this->view('admin.post.edit', compact('post'));
+        $tags = (new Tags($this->getDb()))->all();
+        return $this->view('admin.post.edit', compact('post', 'tags'));
 
     }
 
     public function update(int $id)
     {
         $post = new Post($this->getDb());
-        $result = $post->update($id, $_POST);
+        $tags = array_pop($_POST);
+        $result = $post->update($id, $_POST, $tags);
 
         if ($result) {
             return header('Location: http://localhost/site_php/admin/posts');
