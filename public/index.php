@@ -24,6 +24,8 @@ $router->getUrl('/posts/:id', 'App\Controllers\BlogController@show');
 $router->getUrl('/tags/:id', 'App\Controllers\BlogController@tag');
 
 $router->getUrl('/admin/posts', 'App\Controllers\Admin\PostController@index');
+$router->getUrl('/admin/posts/create', 'App\Controllers\Admin\PostController@create');
+$router->post('/admin/posts/create', 'App\Controllers\Admin\PostController@createPost');
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
 $router->getUrl('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
 $router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');

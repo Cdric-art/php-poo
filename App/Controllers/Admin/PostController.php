@@ -16,11 +16,22 @@ class PostController extends Controller
         return $this->view('admin.post.index', compact('posts'));
     }
 
+    public function create()
+    {
+        $tags = (new Tags($this->getDb()))->all();
+        return $this->view('admin.post.form', compact('tags'));
+    }
+
+    public function createPost()
+    {
+
+    }
+
     public function edit(int $id)
     {
         $post = (new Post($this->getDb()))->findById($id);
         $tags = (new Tags($this->getDb()))->all();
-        return $this->view('admin.post.edit', compact('post', 'tags'));
+        return $this->view('admin.post.form', compact('post', 'tags'));
 
     }
 

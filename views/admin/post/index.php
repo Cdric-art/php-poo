@@ -1,4 +1,7 @@
 <h1>Espace administration</h1>
+
+<a class="btn btn-outline-primary mt-3" href="http://localhost/site_php/admin/posts/create">Créer un nouvel article</a>
+
 <div class="container mt-5">
 	<table class="table">
 		<thead>
