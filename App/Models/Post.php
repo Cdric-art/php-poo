@@ -34,6 +34,6 @@ class Post extends Model
             SELECT t.* FROM tags t
             INNER JOIN post_tag pt on t.id = pt.tag_id
             WHERE pt.post_id = ?
-            ", $this->id);
+            ", [$this->id]);
     }
 }

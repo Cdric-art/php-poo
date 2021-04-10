@@ -22,7 +22,7 @@
 		</ul>
 	</div>
 </nav>
-<div class="container text-center mt-5">
+<div class="container mt-5">
     <?= $content ?>
 </div>
 </body>

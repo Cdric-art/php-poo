@@ -25,6 +25,9 @@ $router->getUrl('/tags/:id', 'App\Controllers\BlogController@tag');
 
 $router->getUrl('/admin/posts', 'App\Controllers\Admin\PostController@index');
 $router->post('/admin/posts/delete/:id', 'App\Controllers\Admin\PostController@destroy');
+$router->getUrl('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@edit');
+$router->post('/admin/posts/edit/:id', 'App\Controllers\Admin\PostController@update');
+
 
 try {
     $router->run();

@@ -18,14 +18,14 @@ abstract class Model
         $this->db = $db;
     }
 
-    public function query(string $sql, int $param = null, bool $single = null)
+    public function query(string $sql, array $param = null, bool $single = null)
     {
-        $method = is_null($param) ? 'query' : 'prepare';
+        $method = empty($param) ? 'query' : 'prepare';
 
-        if (strpos($sql, 'DELETE') === 0 || strpos($sql, 'UPDATE') === 0 || strpos($sql, 'CREATED') === 0) {
+        if (strpos($sql, 'DELETE') === 0 || strpos($sql, 'UPDATE') === 0 || strpos($sql, 'CREATE') === 0) {
             $stmt = $this->db->getPDO()->$method($sql);
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_class($this), [$this->db]);
-            return $stmt->execute([$param]);
+            return $stmt->execute($param);
         }
 
         $fetch = is_null($single) ? 'fetchAll' : 'fetch';
@@ -36,7 +36,7 @@ abstract class Model
         if ($method === 'query') {
             return $stmt->$fetch();
         } else {
-            $stmt->execute([$param]);
+            $stmt->execute($param);
             return $stmt->$fetch();
         }
     }
@@ -48,12 +48,28 @@ abstract class Model
 
     public function findById(int $id): Model
     {
-        return $this->query("SELECT * FROM {$this->table} WHERE id = ?", $id, true);
+        return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
+    }
+
+    public function update(int $id, array $data): Bool
+    {
+        $sqlPrep = "";
+        $i = 1;
+
+        foreach ($data as $key => $value) {
+            $comma = $i === count($data) ? ' ' : ', ';
+            $sqlPrep .= "{$key} = :{$key}{$comma}";
+            $i++;
+        }
+
+        $data['id'] = $id;
+
+        return $this->query("UPDATE {$this->table} SET {$sqlPrep} WHERE id =:id", $data);
     }
 
     public function destroy(int $id): bool
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?", $id);
+        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
     }
 
 }
