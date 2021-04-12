@@ -20,6 +20,19 @@
 				<a class="nav-link" href="http://localhost/site_php/posts">Les articles</a>
 			</li>
 		</ul>
+		<?php if (isset($_SESSION['auth'])): ?>
+			<ul class="navbar-nav ml-5">
+				<li class="nav-item">
+					<a class="nav-link" href="http://localhost/site_php/logout">Se déconnecter</a>
+				</li>
+			</ul>
+		<?php else : ?>
+			<ul class="navbar-nav ml-5">
+				<li class="nav-item">
+					<a class="nav-link" href="http://localhost/site_php/login">Se connecter</a>
+				</li>
+			</ul>
+		<?php endif; ?>
 	</div>
 </nav>
 <div class="container mt-5">

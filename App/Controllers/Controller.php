@@ -13,6 +13,9 @@ abstract class Controller
 
     public function __construct(DbConnection $db)
     {
+        if (session_start() === PHP_SESSION_NONE) {
+            session_start();
+        };
         $this->db = $db;
     }
 
@@ -31,6 +34,15 @@ abstract class Controller
     protected function getDb(): DbConnection
     {
         return $this->db;
+    }
+
+    protected function isAdmin()
+    {
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] === "1") {
+            return true;
+        } else {
+            header('Location: http://localhost/site_php/login');
+        }
     }
 
 }

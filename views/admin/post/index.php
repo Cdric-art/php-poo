@@ -1,5 +1,11 @@
 <h1>Espace administration</h1>
 
+<?php if (isset($_GET['success'])): ?>
+	<div class="alert alert-info">
+		Vous etes connecte
+	</div>
+<?php endif; ?>
+
 <a class="btn btn-outline-primary mt-3" href="http://localhost/site_php/admin/posts/create">Créer un nouvel article</a>
 
 <div class="container mt-5">

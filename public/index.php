@@ -18,6 +18,10 @@ const DB_PASSWORD = 'root';
 
 $router = new Router($_GET['url']);
 
+$router->getUrl('/login', 'App\Controllers\UserController@login');
+$router->post('/login', 'App\Controllers\UserController@loginPost');
+$router->getUrl('/logout', 'App\Controllers\UserController@logout');
+
 $router->getUrl('/', 'App\Controllers\BlogController@welcome');
 $router->getUrl('/posts', 'App\Controllers\BlogController@index');
 $router->getUrl('/posts/:id', 'App\Controllers\BlogController@show');
