@@ -2,7 +2,7 @@
 
 <form action="<?= isset($params['post'])
 		? "http://localhost/site_php/admin/posts/edit/{$params['post']->id}"
-		: 'http://localhost/site_php/admin/posts/edit/create' ?>" method="post">
+		: 'http://localhost/site_php/admin/posts/create' ?>" method="post">
 	<div class="form-group mt-5">
 		<label for="title" id="title">Titre de l'article</label>
 		<input type="text" class="form-control" name="title" value="<?= $params['post']->title ?? '' ?>">
